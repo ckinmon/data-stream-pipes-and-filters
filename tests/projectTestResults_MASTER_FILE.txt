@@ -1,0 +1,785 @@
+Caleb Kinmon (UNI: cgk2128) 
+Hwk3 Program Test Results - Master File
+
+I created this file because it seemed like bad design to include all of 
+these tests and the results and their inputs and outputs in a class in
+a .java file. These are all the tests that were performed on this program,
+and that can be replicated. Some tests and results were not included, such
+as those that failed, because the same data was then retested until the
+program behaved as desired.
+
+Testing Information:
+
+Test 1:
+
+Testing for an invalid file. File name should be "testFile.txt", but is instead
+"invalidTestFile.txt". The file should tell the user that the file does not exist.
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: invalidTestFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Error: File not found.
+
+Test 2:
+
+Testing for an invalid header in the file where a field exists that is not a String.
+The system should terminate because this is a fatal error.
+
+Input File:
+Name	Age	Cell Ph4one	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Name	Age	Cell Ph4one	Zip Code	
+Fatal Error: File was not streamed. 
+
+Output File:
+Name	Age	Cell Ph4one	Zip Code
+String	long	long	long
+
+Test 3:
+
+Testing for an additional tab in the header file. This should also prompt a fatal 
+error that should terminate the stream.
+
+Input File:
+Name	Age	Cell Phone		Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Name	Age	Cell Phone		Zip Code	
+Fatal Error: File was not streamed. 
+
+Output File:
+Name	Age	Cell Phone		Zip Code
+String	long	long	long
+
+Test 4:
+
+Testing for an invalid record type (the second line in file).  The fields should
+only contain values that match "string" or "long". 
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	lon5g
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: String	long	long	lon5g	
+Fatal Error: File was not streamed. 
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	lon5g
+
+Test 5:
+
+Testing for an invalid record type (the second line in file).  The fields should
+not contain consecutive tabs. The program should terminate this test.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+	String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: 	String	long	long	long	
+Fatal Error: File was not streamed. 
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+	String	long	long	long
+
+Test 6:
+
+Testing for an invalid record (rows after the second row).  If the first column
+of the second row says long, then any field in the first column of the records
+should only contain longs. We will put a string in a long. Invalid records
+should be displayed to the user, and should not be streamed to the new file.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20AA	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Frank	20AA	2121117777	10027	
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Test 7:
+
+Testing for another invalid record, where the size of the record should match
+the size of the header record. If it does not, then it is not in proper form
+and should not be streamed.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Frank	20	20	2121117777	10027	
+The length of the record does not match the length of the header.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Test 8:
+
+Testing to make sure the filter is working from the TSVFilter class. We will
+test the select methods of the WhichFile class. We will test the "Name" and
+"Frank" filter so that only records with the name Frank are streamed to the 
+new file.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: Name	Data: Frank	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+
+Test 9:
+
+Testing the select() filter with Age and 20. 
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: Age	Data: 20	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Test 10:
+
+We will apply a select filter() that contains an invalid
+field that is not a part of the type record in the file. This means
+that none of the records should be streamed to the new file.
+
+.select("Street Number", 150)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: Street Number	Data: 150	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+
+Test 11:
+
+We will test the terminal .compute() filter without the .select() filter. 
+The first one is min, which should display the minimal value to the screen.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+The first test is for a String field: .compute("Name", Terminal.MIN)
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: MIN
+Terminal Field: Name	inARowField : null	inARowValue: null.
+
+Terminal Value: Bill
+
+The second test is for a long field: .compute("Age", Terminal.MIN)
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: MIN
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Terminal Value: 18
+
+Test 12:
+
+This will test the .compute() terminal for max.
+
+.compute("Age", Terminal.MAX)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: MAX
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Terminal Value: 32
+
+Test 13:
+
+This will test the .compute() terminal for count.
+
+.compute("Age", Terminal.COUNT)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: COUNT
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Terminal Value: 7
+
+Test 14:
+
+This will test the .compute() terminal for sum.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+This "compute("Age", Terminal.SUM)" should return a number.
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: SUM
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Terminal Value: 148
+
+This "compute("Name", Terminal.SUM)" should not since it is a string.
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: SUM
+Terminal Field: Name	inARowField : null	inARowValue: null.
+
+Error: Cannot take the sum of a non-number.
+Error: Cannot take the sum of a non-number.
+Error: Cannot take the sum of a non-number.
+Error: Cannot take the sum of a non-number.
+Error: Cannot take the sum of a non-number.
+Error: Cannot take the sum of a non-number.
+Error: Cannot take the sum of a non-number.
+Terminal Value: 0
+
+Test 15:
+
+This is to test .compute for ALLSAME.
+
+.compute("Name", Terminal.ALLSAME)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: ALLSAME
+Terminal Field: Name	inARowField : null	inARowValue: null.
+
+Terminal Value: false
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Frank	18	2010001123	99876
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: ALLSAME
+Terminal Field: Name	inARowField : null	inARowValue: null.
+
+Terminal Value: true
+
+Test 16:
+
+This tests the order of using .select() and .compute(). In this case, we are
+testing the functionality of using both of them together.
+
+.select("Name", "Frank")
+.compute("Name", Terminal.COUNT)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: Name	Data: Frank	Terminal: COUNT
+Terminal Field: Name	inARowField : null	inARowValue: null.
+
+Terminal Value: 3
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+
+Test 17:
+
+This tests the data stream without any filter applied, or terminal computation.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Test 18:
+
+This tests the new terminal computation FIRSTDIFF without a .select() filter.  
+
+.compute("Name", Terminal.FIRSTDIFF)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: FIRSTDIFF
+Terminal Field: Name	inARowField : null	inARowValue: null.
+
+Tony	18	2010001123	99876	0
+
+Test 19:
+
+This tests the terminal computation FIRSTDIFF with a .select() filter and
+looking at a different field, such as Age, where the first two values are 
+the same.
+
+.select("Zip Code", 43210)
+.compute("Age", Terminal.FIRSTDIFF)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: Zip Code	Data: 43210	Terminal: FIRSTDIFF
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Frank	32	9142218421	43210	0
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+
+Test 20:
+
+This tests the new inARow filter, where the adjacent values of a certain
+N will be streamed to the output file, if they all match.
+
+.inARow("Age", 2)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : Age	inARowValue: 2.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Test 21:
+
+This tests the inARow filter with a value of one, to make sure the whole file
+is streamed.
+
+.inARow("Name", 1)
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : Age	inARowValue: 1.
+
+Output File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Test 22:
+
+Testing a file filled with newlines. The program should terminated because
+the file is fatally invalid.
+
+Input File:
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: 	
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: 	
+Fatal Error: File was not streamed. 
+
+Output File:
+
+Test 23:
+
+Testing a file without a type record (the second row). The program should
+terminate because the file is fatally invalid.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+Frank	20	2121117777	10027
+Tony	18	2010001123	99876
+Molly	19	9171118421	43210
+Frank	19	9171118421	43210
+Frank	32	9142218421	43210
+Bill	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Frank	20	2121117777	10027	
+Fatal Error: File was not streamed. 
+
+Test 24:
+
+This is the final test to check if a huge file can be streamed successfully. I
+included the input file testFile2.txt in the zip folder. The resulting output file
+is also saved in the zip folder as newFile.txt.
+
+Input File:   testFile2.txt
+Output File:  newFile.txt
+
+I ran the terminal operation count without a filter to test the original file size.
+
+.compute("Age", Terminal.COUNT)
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: null	Data: null	Terminal: COUNT
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Terminal Value: 189
+
+Then I ran a filter with the terminal operation count to see how many records
+were filtered.
+
+.select("Name", "Frank)
+.compute("Age", Terminal.COUNT)
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile2.txt	Selection: Name	Data: Frank	Terminal: COUNT
+Terminal Field: Age	inARowField : null	inARowValue: null.
+
+Terminal Value: 43
+
+Test 25:
+
+This is a test to check the validation for the values of the fields
+"Name" "Zip Code" "Age" and "Cell Phone". There are four records that
+contain bad data. The program should detect the bad data, print out the
+bad record, and stream only good records to the new file. No filter is
+being applied.
+
+Input File:
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Tony	-1	2010001123	99876
+Molly	19	9171118421	453210
+Frank	19	91711158421	43210
+Frank	32	9142218421	43210
+Bil4l	20	2121117787	10027
+Johnny	20	2121117767	10027
+
+Displayed Results:
+
+Filter Object Information: 
+File Name: testFile3.tsv	Selection: null	Data: null	Terminal: null
+Terminal Field: null	inARowField : null	inARowValue: null.
+
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Tony	-1	2010001123	99876	
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Molly	19	9171118421	453210	
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Frank	19	91711158421	43210	
+Improperly formatted record detected. Improper records are not outputted.
+Bad record: Bil4l	20	2121117787	10027	
+
+Output File:
+
+Name	Age	Cell Phone	Zip Code
+String	long	long	long
+Frank	20	2121117777	10027
+Frank	32	9142218421	43210
+Johnny	20	2121117767	10027
+
